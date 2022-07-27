@@ -1,0 +1,15 @@
+module mFlipFlop_D_PosEdgeClk_PosEdgeReset_Enable(input iD, 
+																	input iClk,
+																	input iEnable,															
+																	output reg oQ);
+
+always@(posedge iClk)
+	if(iEnable == 0)
+		oQ <= 1'b0;
+	else 
+		if(iEnable == 1)
+		begin
+			oQ <= iD;
+		end
+		
+endmodule

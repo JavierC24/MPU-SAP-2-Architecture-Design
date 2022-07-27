@@ -1,0 +1,51 @@
+module mMemory (	input [15:0] iAddress, // from MAR
+						input iRW, // read = 0 (mem to MDR), write = 1 (MDR to mem)
+						input iEmem, // enable memory
+						input iLmem, // load memory
+						inout reg [7:0] iMDR, // to MDR
+						inout reg [7:0] oMDR, // from MDR
+						output reg [7:0] oRAM,
+						output reg [7:0] oROM
+					 );
+					 
+	reg [7:0] aMemory [0:255];
+
+	initial
+		$readmemh("C:\Users\User\Documents\COLLEGE\2020-2021\2nd sem\ECE21121L\Experiments\MPU Integration\MPU", aMemory);
+	
+	always @(iAddress or iRW or iEmem or iLmem)
+	begin
+		if (iAddress >= 16'h0000 && iAddress <= 16'h007F)
+			begin
+				if (!iRW && !iEmem) // read
+					oROM <= aMemory[iAddress];
+				else if (!iRW && iEmem) // read
+					begin
+					oROM <= aMemory[iAddress];
+					iMDR <= oROM;
+					end
+				else	
+					$display("Invalid control signals for memory");
+			end	
+		else if (iAddress >= 16'h0080 && iAddress <= 16'h00FF)
+			begin
+				if (!iRW && !iEmem) // read
+					oRAM <= aMemory[iAddress];
+				else if (!iRW && iEmem) // read
+					begin
+					oRAM <= aMemory[iAddress];
+					iMDR <= oRAM;
+					end
+				else if (iRW && iLmem) // write
+					oRAM <= oMDR;
+				else	
+					$display("Invalid control signals for memory");
+			end
+		else
+			begin
+				oROM <= 16'h0000;
+				oRAM <= 16'h0000;
+			end
+	end
+	
+endmodule

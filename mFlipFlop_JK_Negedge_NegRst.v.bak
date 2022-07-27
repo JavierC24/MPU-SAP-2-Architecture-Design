@@ -1,0 +1,43 @@
+module mFlipFlop_JK_Negedge_NegRst (iClk, iReset, iJ, iK, oQ, oQBar, iEnableF, iEnableH, iEnableL, iLoad);
+
+input iClk, iJ, iK, iReset, iEnableF, iEnableH, iEnableL, iLoad;
+output reg oQ, oQBar;
+
+always@(negedge iClk or negedge iReset or negedge iEnableF or negedge iEnableH or negedge iEnableL)
+	if (!iReset)
+		begin
+		oQ <= 1'b0;
+		end
+	else if (!iEnableF)
+		begin
+		oQ <= iLoad;
+		end
+	else if (!iEnableH)
+		begin
+		oQ <= iLoad;
+		end
+	else if (!iEnableL)
+		begin
+		oQ <= iLoad;
+		end	
+	else if (iLoad & !iEnableF & !iEnableH & !iEnableL)
+	begin
+		if (!iJ && !iK)
+			begin
+			oQ <= oQ;
+			end
+		else if (!iJ && iK)
+			begin
+			oQ <= 1'b0;
+			end
+		else if (iJ && !iK)
+			begin
+			oQ <= 1'b1;
+			end
+		else
+			begin
+			oQ <= ~oQ;
+			end
+	end
+endmodule
+

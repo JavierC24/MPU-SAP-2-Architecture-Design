@@ -1,0 +1,15 @@
+module mHexRegister(	input iSelect, //1 for FFFF and 0 for FFFE
+							input iEn,
+							output reg [15:0]oMAR	);
+
+
+always@(iEn)
+	if (iEn)
+		if (iSelect)
+			oMAR[15:0] = 16'b1111111111111111;
+		else
+			oMAR[15:0] = 16'b1111111111111110;
+	else
+		oMAR[15:0] = 16'b0;
+							
+endmodule

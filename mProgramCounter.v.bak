@@ -1,0 +1,68 @@
+module mProgramCounter (input iIncrement,
+								input iEnableF,
+								input iEnableH,
+								input iEnableL,
+								input iClk,
+								input iReset,
+								input [15:0] iLoad,
+								output tri [15:0] tWbus,
+								inout wire [15:0] nProgramCounter
+								);
+
+mFlipFlop_JK_Negedge_NegRst Programcounter_0 (.iJ(iIncrement), .iK(iIncrement), .iClk(iClk), .iLoad(iLoad[0]), .iReset(iReset), .iEnableF(iEnableF), .iEnableH(iEnableH),.iEnableL(iEnableL),.oQ(nProgramCounter[0]));
+mFlipFlop_JK_Negedge_NegRst Programcounter_1 (.iJ(iIncrement), .iK(iIncrement), .iClk(nProgramCounter[0]), .iLoad(iLoad[1]), .iReset(iReset), .iEnableF(iEnableF),.iEnableH(iEnableH),.iEnableL(iEnableL),.oQ(nProgramCounter[1]));
+mFlipFlop_JK_Negedge_NegRst Programcounter_2 (.iJ(iIncrement), .iK(iIncrement), .iClk(nProgramCounter[1]), .iLoad(iLoad[2]), .iReset(iReset), .iEnableF(iEnableF),.iEnableH(iEnableH),.iEnableL(iEnableL),.oQ(nProgramCounter[2]));
+mFlipFlop_JK_Negedge_NegRst Programcounter_3 (.iJ(iIncrement), .iK(iIncrement), .iClk(nProgramCounter[2]), .iLoad(iLoad[3]), .iReset(iReset), .iEnableF(iEnableF),.iEnableH(iEnableH),.iEnableL(iEnableL),.oQ(nProgramCounter[3]));
+mFlipFlop_JK_Negedge_NegRst Programcounter_4 (.iJ(iIncrement), .iK(iIncrement), .iClk(nProgramCounter[3]), .iLoad(iLoad[4]), .iReset(iReset),.iEnableF(iEnableF),.iEnableH(iEnableH), .iEnableL(iEnableL),.oQ(nProgramCounter[4]));
+mFlipFlop_JK_Negedge_NegRst Programcounter_5 (.iJ(iIncrement), .iK(iIncrement), .iClk(nProgramCounter[4]), .iLoad(iLoad[5]), .iReset(iReset), .iEnableF(iEnableF),.iEnableH(iEnableH),.iEnableL(iEnableL),.oQ(nProgramCounter[5]));
+mFlipFlop_JK_Negedge_NegRst Programcounter_6 (.iJ(iIncrement), .iK(iIncrement), .iClk(nProgramCounter[5]), .iLoad(iLoad[6]), .iReset(iReset), .iEnableF(iEnableF),.iEnableH(iEnableH),.iEnableL(iEnableL),.oQ(nProgramCounter[6]));
+mFlipFlop_JK_Negedge_NegRst Programcounter_7 (.iJ(iIncrement), .iK(iIncrement), .iClk(nProgramCounter[6]), .iLoad(iLoad[7]), .iReset(iReset), .iEnableF(iEnableF),.iEnableH(iEnableH),.iEnableL(iEnableL),.oQ(nProgramCounter[7]));
+mFlipFlop_JK_Negedge_NegRst Programcounter_8 (.iJ(iIncrement), .iK(iIncrement), .iClk(nProgramCounter[7]), .iLoad(iLoad[8]), .iReset(iReset), .iEnableF(iEnableF),.iEnableH(iEnableH),.iEnableL(iEnableL),.oQ(nProgramCounter[8]));
+mFlipFlop_JK_Negedge_NegRst Programcounter_9 (.iJ(iIncrement), .iK(iIncrement), .iClk(nProgramCounter[8]), .iLoad(iLoad[9]), .iReset(iReset), .iEnableF(iEnableF),.iEnableH(iEnableH),.iEnableL(iEnableL),.oQ(nProgramCounter[9]));
+mFlipFlop_JK_Negedge_NegRst Programcounter_10 (.iJ(iIncrement), .iK(iIncrement), .iClk(nProgramCounter[9]), .iLoad(iLoad[10]), .iReset(iReset), .iEnableF(iEnableF),.iEnableH(iEnableH),.iEnableL(iEnableL),.oQ(nProgramCounter[10]));
+mFlipFlop_JK_Negedge_NegRst Programcounter_11 (.iJ(iIncrement), .iK(iIncrement), .iClk(nProgramCounter[10]), .iLoad(iLoad[11]), .iReset(iReset), .iEnableF(iEnableF),.iEnableH(iEnableH),.iEnableL(iEnableL),.oQ(nProgramCounter[11]));
+mFlipFlop_JK_Negedge_NegRst Programcounter_12 (.iJ(iIncrement), .iK(iIncrement), .iClk(nProgramCounter[11]), .iLoad(iLoad[12]), .iReset(iReset), .iEnableF(iEnableF),.iEnableH(iEnableH),.iEnableL(iEnableL),.oQ(nProgramCounter[12]));
+mFlipFlop_JK_Negedge_NegRst Programcounter_13 (.iJ(iIncrement), .iK(iIncrement), .iClk(nProgramCounter[12]), .iLoad(iLoad[13]), .iReset(iReset), .iEnableF(iEnableF),.iEnableH(iEnableH),.iEnableL(iEnableL),.oQ(nProgramCounter[13]));
+mFlipFlop_JK_Negedge_NegRst Programcounter_14 (.iJ(iIncrement), .iK(iIncrement), .iClk(nProgramCounter[13]), .iLoad(iLoad[14]), .iReset(iReset), .iEnableF(iEnableF),.iEnableH(iEnableH),.iEnableL(iEnableL),.oQ(nProgramCounter[14]));
+mFlipFlop_JK_Negedge_NegRst Programcounter_15 (.iJ(iIncrement), .iK(iIncrement), .iClk(nProgramCounter[14]), .iLoad(iLoad[15]),.iReset(iReset), .iEnableF(iEnableF),.iEnableH(iEnableH),.iEnableL(iEnableL),.oQ(nProgramCounter[15]));
+
+//16 Bits to BUS{ALL}
+bufif1(tWbus[0], nProgramCounter[0], iEnableF);
+bufif1(tWbus[1], nProgramCounter[1], iEnableF);
+bufif1(tWbus[2], nProgramCounter[2], iEnableF);
+bufif1(tWbus[3], nProgramCounter[3], iEnableF);
+bufif1(tWbus[4], nProgramCounter[4], iEnableF);
+bufif1(tWbus[5], nProgramCounter[5], iEnableF);
+bufif1(tWbus[6], nProgramCounter[6], iEnableF);
+bufif1(tWbus[7], nProgramCounter[7], iEnableF);
+bufif1(tWbus[8], nProgramCounter[8], iEnableF);
+bufif1(tWbus[9], nProgramCounter[9], iEnableF);
+bufif1(tWbus[10], nProgramCounter[10], iEnableF);
+bufif1(tWbus[11], nProgramCounter[11], iEnableF);
+bufif1(tWbus[12], nProgramCounter[12], iEnableF);
+bufif1(tWbus[13], nProgramCounter[13], iEnableF);
+bufif1(tWbus[14], nProgramCounter[14], iEnableF);
+bufif1(tWbus[15], nProgramCounter[15], iEnableF);
+
+//8 Bits to BUS {LOW}
+bufif1(tWbus[0], nProgramCounter[0], iEnableL);
+bufif1(tWbus[1], nProgramCounter[1], iEnableL);
+bufif1(tWbus[2], nProgramCounter[2], iEnableL);
+bufif1(tWbus[3], nProgramCounter[3], iEnableL);
+bufif1(tWbus[4], nProgramCounter[4], iEnableL);
+bufif1(tWbus[5], nProgramCounter[5], iEnableL);
+bufif1(tWbus[6], nProgramCounter[6], iEnableL);
+bufif1(tWbus[7], nProgramCounter[7], iEnableL);
+
+//8 Bits to BUS {HIGH}
+bufif1(tWbus[0], nProgramCounter[8], iEnableH);
+bufif1(tWbus[1], nProgramCounter[9], iEnableH);
+bufif1(tWbus[2], nProgramCounter[10], iEnableH);
+bufif1(tWbus[3], nProgramCounter[11], iEnableH);
+bufif1(tWbus[4], nProgramCounter[12], iEnableH);
+bufif1(tWbus[5], nProgramCounter[13], iEnableH);
+bufif1(tWbus[6], nProgramCounter[14], iEnableH);
+bufif1(tWbus[7], nProgramCounter[15], iEnableH);
+
+
+endmodule
